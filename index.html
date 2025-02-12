@@ -402,6 +402,106 @@
             look-controls="pointerLockEnabled: false"
             wasd-controls-enabled="false">
         </a-entity>
+
+        <!-- Test Text Elements -->
+        <a-entity position="0 0 -2">
+            <!-- Test 1: Basic Text -->
+            <a-text
+                value="Test 1: Basic Text"
+                position="0 2 0"
+                color="white"
+                scale="1 1 1">
+            </a-text>
+
+            <!-- Test 2: Text with Background -->
+            <a-entity position="0 1.5 0">
+                <a-plane
+                    color="black"
+                    width="2"
+                    height="0.5"
+                    position="0 0 -0.01">
+                </a-plane>
+                <a-text
+                    value="Test 2: Text with Background"
+                    position="-0.9 0.1 0"
+                    color="cyan"
+                    scale="0.5 0.5 0.5"
+                    anchor="left">
+                </a-text>
+            </a-entity>
+
+            <!-- Test 3: Larger Text -->
+            <a-text
+                value="Test 3: Large Text"
+                position="0 1 0"
+                color="#FF0000"
+                scale="2 2 2"
+                align="center">
+            </a-text>
+
+            <!-- Test 4: Text with Different Properties -->
+            <a-text
+                value="Test 4: Different Properties"
+                position="0 0.5 0"
+                color="yellow"
+                scale="1 1 1"
+                baseline="top"
+                anchor="center"
+                width="2"
+                wrap-count="20">
+            </a-text>
+
+            <!-- Test 5: Text at Different Z-depth -->
+            <a-text
+                value="Test 5: Different Z-depth"
+                position="0 0 1"
+                color="green"
+                scale="1 1 1">
+            </a-text>
+        </a-entity>
+
+        <!-- Test Card with Text -->
+        <a-entity position="-2 1.6 -3">
+            <a-plane
+                color="#333333"
+                width="2"
+                height="3"
+                position="0 0 0">
+                
+                <!-- Header -->
+                <a-text
+                    value="Test Card Header"
+                    position="0 1.2 0.01"
+                    color="white"
+                    scale="0.5 0.5 0.5"
+                    align="center"
+                    anchor="center">
+                </a-text>
+
+                <!-- Body Text -->
+                <a-text
+                    value="This is a test card with multiple lines of text to check visibility and wrapping."
+                    position="0 0 0.01"
+                    color="#4CC3D9"
+                    scale="0.3 0.3 0.3"
+                    align="center"
+                    anchor="center"
+                    width="4"
+                    wrap-count="30">
+                </a-text>
+
+                <!-- Footer -->
+                <a-text
+                    value="Test Card Footer"
+                    position="0 -1.2 0.01"
+                    color="white"
+                    scale="0.4 0.4 0.4"
+                    align="center"
+                    anchor="center">
+                </a-text>
+            </a-plane>
+        </a-entity>
+
     </a-scene>
 
     <!-- Loading Screen -->
