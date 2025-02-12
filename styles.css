@@ -1,0 +1,207 @@
+/* Base styles */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: none;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+/* Instructions overlay */
+.instructions {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1.2em;
+    z-index: 1000;
+    pointer-events: none;
+    animation: fadeInOut 2s infinite;
+    border: 2px solid #4CC3D9;
+    max-width: 80%;
+}
+
+/* Loading screen */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.loading-text {
+    color: white;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1.4em;
+    text-align: center;
+    padding: 30px;
+    background: rgba(76, 195, 217, 0.1);
+    border: 2px solid rgba(76, 195, 217, 0.3);
+    border-radius: 15px;
+    animation: pulse 2s infinite;
+    text-shadow: 0 0 10px rgba(76, 195, 217, 0.5);
+    max-width: 80%;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { 
+        transform: scale(1) translateZ(0);
+        box-shadow: 0 0 0 0 rgba(76, 195, 217, 0.4);
+    }
+    50% { 
+        transform: scale(1.05) translateZ(0);
+        box-shadow: 0 0 0 10px rgba(76, 195, 217, 0);
+    }
+    100% { 
+        transform: scale(1) translateZ(0);
+        box-shadow: 0 0 0 0 rgba(76, 195, 217, 0);
+    }
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.6; }
+}
+
+/* Interactive elements */
+[clickable] {
+    cursor: pointer;
+    touch-action: manipulation;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .instructions {
+        font-size: 1em;
+        padding: 15px;
+    }
+
+    .loading-text {
+        font-size: 1.1em;
+        padding: 20px;
+    }
+
+    [clickable] {
+        min-width: 44px;
+        min-height: 44px;
+    }
+}
+
+/* Battery saving mode */
+@media (prefers-reduced-motion: reduce) {
+    .instructions,
+    .loading-text {
+        animation: none;
+    }
+}
+
+/* High-contrast mode */
+@media (prefers-contrast: high) {
+    .instructions,
+    .loading-text {
+        background: rgba(0, 0, 0, 0.9);
+        border: 3px solid #4CC3D9;
+    }
+}
+
+/* Prevent text selection */
+* {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Performance indicator */
+.performance-indicator {
+    margin-top: 15px;
+    font-size: 0.8em;
+    color: #4CC3D9;
+    opacity: 0.8;
+}
+
+/* Permission button with touch optimization */
+.permission-button {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    padding: 15px 30px;
+    background: #4CC3D9;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    will-change: transform;
+}
+
+.permission-button:active {
+    transform: translate(-50%, -50%) scale(0.95);
+    background: #3BA3B9;
+}
+
+/* Video container with hardware acceleration */
+#arjs-video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    transform: translateZ(0);
+    will-change: transform;
+    z-index: -1;
+}
+
+/* Landscape orientation message */
+@media (orientation: portrait) {
+    .loading-text::after {
+        content: "Please rotate your device to landscape mode for the best experience";
+        display: block;
+        margin-top: 10px;
+        font-size: 0.8em;
+        color: #4CC3D9;
+    }
+}
+
+/* iOS-specific fixes */
+@supports (-webkit-touch-callout: none) {
+    #arjs-video {
+        position: absolute !important;
+    }
+    
+    .loading-text {
+        -webkit-backdrop-filter: blur(5px);
+    }
+} 

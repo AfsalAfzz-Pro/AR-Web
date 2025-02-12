@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AR Profile Card</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        AFRAME.registerComponent('ar-scene-manager', {
+            init: function() {
+                this.placedObjects = false;
+                this.cameraEl = document.querySelector('[camera]');
+                
+                // Add tap to place functionality
+                document.addEventListener('click', () => {
+                    if (!this.placedObjects) {
+                        this.placeObjects();
+                    }
+                });
+
+                // Show placement instructions
+                const instructions = document.createElement('div');
+                instructions.className = 'instructions';
+                instructions.innerHTML = 'Tap anywhere to place the profile card';
+                document.body.appendChild(instructions);
+            },
+
+            placeObjects: function() {
+                const scene = this.el;
+                const camera = this.cameraEl;
+                const worldPos = new THREE.Vector3();
+                camera.object3D.getWorldPosition(worldPos);
+
+                // Create container for all content
+                const container = document.createElement('a-entity');
+                container.setAttribute('position', `${worldPos.x} ${worldPos.y} ${worldPos.z - 2}`); // Place 2 units in front
+                container.setAttribute('look-at', '[camera]');
+                container.setAttribute('gesture-handler', '');
+
+                // Add your existing content here
+                container.innerHTML = `
+                    <!-- 3D Avatar -->
+                    <a-entity
+                        gltf-model="#avatar"
+                        position="0 0 0"
+                        scale="0.5 0.5 0.5"
+                        rotation="0 0 0"
+                        animation-mixer="clip: *; timeScale: 0.5"
+                        animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true">
+                    </a-entity>
+
+                    <!-- Profile Information Card -->
+                    <a-entity position="1 0.5 0">
+                        <!-- Background Card -->
+                        <a-plane 
+                            position="0 0 -0.1" 
+                            width="2" 
+                            height="3" 
+                            color="#1a1a1a"
+                            opacity="0.9"
+                            animation="property: scale; to: 1.05 1.05 1.05; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate">
+                        </a-plane>
+
+                        <!-- Profile Picture -->
+                        <a-circle
+                            position="0 1.2 0.01"
+                            radius="0.3"
+                            src="#profile-img"
+                            class="clickable"
+                            clickable>
+                        </a-circle>
+
+                        <!-- Name with Color Toggle -->
+                        <a-text 
+                            value="AR/VR Developer"
+                            position="-0.8 0.7 0.01"
+                            color="#4CC3D9"
+                            scale="0.8 0.8 0.8"
+                            baseline="top"
+                            anchor="left"
+                            color-toggle>
+                        </a-text>
+
+                        <!-- Title -->
+                        <a-text
+                            value="Full Stack & Extended Reality"
+                            position="-0.8 0.5 0.01"
+                            color="#FFF"
+                            scale="0.5 0.5 0.5"
+                            baseline="top"
+                            anchor="left">
+                        </a-text>
+
+                        <!-- About Me -->
+                        <a-entity position="-0.8 0.2 0.01">
+                            <a-text
+                                value="About Me:"
+                                position="0 0 0"
+                                color="#4CC3D9"
+                                scale="0.5 0.5 0.5"
+                                baseline="top"
+                                anchor="left">
+                            </a-text>
+                            <a-text
+                                value="Passionate developer crafting immersive AR/VR experiences and web applications. Specialized in creating interactive 3D content and innovative solutions."
+                                position="0 -0.15 0"
+                                color="#FFF"
+                                scale="0.35 0.35 0.35"
+                                width="4"
+                                wrap-count="30"
+                                baseline="top"
+                                anchor="left">
+                            </a-text>
+                        </a-entity>
+
+                        <!-- Skills -->
+                        <a-entity position="-0.8 -0.3 0.01">
+                            <a-text
+                                value="Technical Skills:"
+                                position="0 0 0"
+                                color="#4CC3D9"
+                                scale="0.5 0.5 0.5"
+                                baseline="top"
+                                anchor="left">
+                            </a-text>
+                            <a-text
+                                value="• AR/VR Development (Unity, A-Frame)\n• WebXR, Three.js, AR.js\n• Full Stack (MERN Stack)\n• 3D Modeling & Animation\n• UI/UX Design\n• Cloud Services (AWS, Azure)"
+                                position="0 -0.15 0"
+                                color="#FFF"
+                                scale="0.35 0.35 0.35"
+                                width="4"
+                                wrap-count="35"
+                                baseline="top"
+                                anchor="left">
+                            </a-text>
+                        </a-entity>
+
+                        <!-- Contact -->
+                        <a-entity position="-0.8 -0.8 0.01">
+                            <a-text
+                                value="Let's Connect:"
+                                position="0 0 0"
+                                color="#4CC3D9"
+                                scale="0.5 0.5 0.5"
+                                baseline="top"
+                                anchor="left">
+                            </a-text>
+                            <a-text
+                                value="📧 developer@example.com\n🌐 portfolio.dev\n📱 @xr_developer\n💼 github.com/developer"
+                                position="0 -0.15 0"
+                                color="#FFF"
+                                scale="0.35 0.35 0.35"
+                                width="4"
+                                wrap-count="35"
+                                baseline="top"
+                                anchor="left"
+                                class="clickable"
+                                clickable>
+                            </a-text>
+                        </a-entity>
+
+                        <!-- Button -->
+                        <a-entity
+                            position="0 -1.2 0.01"
+                            geometry="primitive: plane; width: 1.5; height: 0.3"
+                            material="color: #4CC3D9"
+                            text="value: View Portfolio; align: center; color: white; width: 4; zOffset: 0.01"
+                            animation="property: material.color; to: #ff9500; dur: 1000; dir: alternate; loop: true"
+                            class="clickable"
+                            clickable>
+                        </a-entity>
+                    </a-entity>
+                `;
+
+                scene.appendChild(container);
+                this.placedObjects = true;
+
+                // Hide instructions
+                document.querySelector('.instructions').style.display = 'none';
+            }
+        });
+
+        // Performance optimization: Disable WebGL antialiasing on mobile
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        AFRAME.registerComponent('optimize-for-device', {
+            init: function () {
+                const sceneEl = this.el;
+                if (isMobile) {
+                    sceneEl.setAttribute('renderer', {
+                        antialias: false,
+                        precision: 'mediump',
+                        powerPreference: 'high-performance'
+                    });
+                }
+            }
+        });
+
+        // Touch gesture handling
+        AFRAME.registerComponent('gesture-handler', {
+            schema: {
+                enabled: { default: true },
+                rotationFactor: { default: 5 },
+                minScale: { default: 0.3 },
+                maxScale: { default: 8 },
+            },
+
+            init: function() {
+                this.handleScale = this.handleScale.bind(this);
+                this.handleRotation = this.handleRotation.bind(this);
+
+                this.isVisible = false;
+                this.initialScale = this.el.object3D.scale.clone();
+                this.scaleFactor = 1;
+
+                this.el.sceneEl.addEventListener('markerFound', (e) => {
+                    this.isVisible = true;
+                });
+                this.el.sceneEl.addEventListener('markerLost', (e) => {
+                    this.isVisible = false;
+                });
+            },
+
+            update: function() {
+                if (this.data.enabled) {
+                    this.el.sceneEl.addEventListener('touchmove', this.handleRotation);
+                    this.el.sceneEl.addEventListener('gesturestart', this.handleScale);
+                    this.el.sceneEl.addEventListener('gesturechange', this.handleScale);
+                }
+            },
+
+            handleRotation: function(event) {
+                if (event.touches.length === 1 && this.isVisible) {
+                    event.preventDefault();
+                    const touch = event.touches[0];
+                    this.el.object3D.rotation.y +=
+                        (touch.movementX || touch.mozMovementX || 0) / 50;
+                }
+            },
+
+            handleScale: function(event) {
+                if (this.isVisible) {
+                    event.preventDefault();
+                    this.scaleFactor *=
+                        1 + (event.scale - 1) * this.data.rotationFactor;
+                    this.scaleFactor = Math.min(
+                        Math.max(this.scaleFactor, this.data.minScale),
+                        this.data.maxScale
+                    );
+
+                    this.el.object3D.scale.x = this.scaleFactor * this.initialScale.x;
+                    this.el.object3D.scale.y = this.scaleFactor * this.initialScale.y;
+                    this.el.object3D.scale.z = this.scaleFactor * this.initialScale.z;
+                }
+            },
+
+            remove: function() {
+                this.el.sceneEl.removeEventListener('touchmove', this.handleRotation);
+                this.el.sceneEl.removeEventListener('gesturestart', this.handleScale);
+                this.el.sceneEl.removeEventListener('gesturechange', this.handleScale);
+            }
+        });
+
+        // Enhanced clickable component with haptic feedback
+        AFRAME.registerComponent('clickable', {
+            init: function () {
+                this.el.addEventListener('click', (evt) => {
+                    this.setAttribute('scale', {x: 1.2, y: 1.2, z: 1.2});
+                    
+                    // Haptic feedback
+                    if (navigator.vibrate) {
+                        navigator.vibrate(50);
+                    }
+
+                    setTimeout(() => {
+                        this.setAttribute('scale', {x: 1, y: 1, z: 1});
+                    }, 300);
+                });
+
+                // Add touch feedback
+                if (isMobile) {
+                    this.el.addEventListener('touchstart', (evt) => {
+                        evt.preventDefault();
+                        this.el.emit('click', {}, false);
+                    });
+                }
+            }
+        });
+
+        AFRAME.registerComponent('color-toggle', {
+            init: function () {
+                let el = this.el;
+                let colors = ['#4CC3D9', '#ff9500'];
+                let index = 0;
+                
+                // Performance optimization: Use requestAnimationFrame
+                let lastToggle = 0;
+                const toggle = (timestamp) => {
+                    if (timestamp - lastToggle >= 1000) {
+                        index = (index + 1) % colors.length;
+                        el.setAttribute('color', colors[index]);
+                        lastToggle = timestamp;
+                    }
+                    requestAnimationFrame(toggle);
+                };
+                requestAnimationFrame(toggle);
+            }
+        });
+
+        AFRAME.registerComponent('marker-handler', {
+            init: function () {
+                const marker = this.el;
+                const loading = document.querySelector('#loading');
+                const sceneEl = document.querySelector('a-scene');
+
+                // Performance optimization: Throttle marker updates
+                let lastUpdate = 0;
+                const updateThreshold = 100; // ms
+
+                marker.addEventListener('markerFound', () => {
+                    const now = performance.now();
+                    if (now - lastUpdate > updateThreshold) {
+                        loading.style.display = 'none';
+                        // Haptic feedback on marker detection
+                        if (navigator.vibrate) {
+                            navigator.vibrate([100, 50, 100]);
+                        }
+                        lastUpdate = now;
+                    }
+                });
+
+                marker.addEventListener('markerLost', () => {
+                    const now = performance.now();
+                    if (now - lastUpdate > updateThreshold) {
+                        loading.style.display = 'flex';
+                        lastUpdate = now;
+                    }
+                });
+
+                // Handle iOS permissions
+                if (DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') {
+                    const button = document.createElement('button');
+                    button.innerHTML = 'Enable AR';
+                    button.classList.add('permission-button');
+                    document.body.appendChild(button);
+
+                    button.addEventListener('click', function() {
+                        DeviceOrientationEvent.requestPermission()
+                            .then(response => {
+                                if (response === 'granted') {
+                                    button.style.display = 'none';
+                                    if (navigator.vibrate) {
+                                        navigator.vibrate(50);
+                                    }
+                                }
+                            })
+                            .catch(console.error);
+                    });
+                }
+
+                // Add battery optimization
+                if (navigator.getBattery) {
+                    navigator.getBattery().then(battery => {
+                        if (battery.level < 0.2) {
+                            // Reduce animation quality when battery is low
+                            document.querySelector('a-scene').setAttribute('renderer', 'precision', 'lowp');
+                        }
+                    });
+                }
+            }
+        });
+
+        // Add service worker for better performance
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(console.error);
+            });
+        }
+    </script>
+</head>
+<body style="margin: 0; overflow: hidden;">
+    <a-scene
+        ar-scene-manager
+        vr-mode-ui="enabled: false"
+        renderer="antialias: true; logarithmicDepthBuffer: true; precision: mediump; powerPreference: high-performance"
+        loading="enabled: false">
+        
+        <a-assets timeout="30000">
+            <a-asset-item id="avatar" src="https://cdn.glitch.com/36cb8393-65c6-408d-a538-055ada20431b/Astronaut.glb?v=1542147958948"></a-asset-item>
+            <img id="profile-img" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg" crossorigin="anonymous">
+        </a-assets>
+
+        <!-- Camera with controls -->
+        <a-entity 
+            camera
+            position="0 1.6 0"
+            look-controls="pointerLockEnabled: false"
+            wasd-controls-enabled="false">
+        </a-entity>
+    </a-scene>
+
+    <!-- Loading Screen -->
+    <div id="loading" style="display: none;">
+        <div class="loading-text">
+            Loading AR Experience...
+            <br><br>
+            <small>Tap anywhere to place the profile card</small>
+        </div>
+    </div>
+</body>
+</html> 
