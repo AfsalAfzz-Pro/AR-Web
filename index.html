@@ -418,7 +418,48 @@
                     animation="property: material.opacity; to: 0.1; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
                 </a-ring>
             </a-entity>
+
+            <!-- Star Wars Style Text Crawl -->
+            <a-entity id="text-container" position="0 0 10" rotation="-45 0 0">
+                <a-text id="crawl-text"
+                    value="JOHN DOE\n\nFULL STACK DEVELOPER\n\n\nAs a Full Stack Developer based in Alappuzha, Kerala, I specialize in building scalable web applications and integrating AI solutions. With experience in both frontend and backend development, I've successfully delivered multiple client projects and automated solutions that significantly improve efficiency.\n\n\nGitHub: github.com/johndoe\nLinkedIn: linkedin.com/in/johndoe\nEmail: john@example.com"
+                    color="#FFE81F"
+                    width="6"
+                    align="center"
+                    baseline="center"
+                    font="monospace"
+                    animation__position="property: position; from: 0 0 0; to: 0 20 -15; dur: 45000; easing: linear; loop: true"
+                    animation__opacity="property: opacity; from: 1; to: 0; dur: 45000; easing: linear; loop: true">
+                </a-text>
+            </a-entity>
+
+            <!-- Star Wars Logo Effect -->
+            <a-entity id="logo-container" position="0 2 0">
+                <a-text
+                    value="JOHN DOE"
+                    color="#FFE81F"
+                    align="center"
+                    scale="2 2 2"
+                    animation__scale="property: scale; from: 2 2 2; to: 0.1 0.1 0.1; dur: 4000; easing: easeInCubic; delay: 1000"
+                    animation__opacity="property: opacity; from: 1; to: 0; dur: 4000; easing: linear; delay: 1000">
+                </a-text>
+            </a-entity>
         </a-entity>
+
+        <!-- Add Star Wars style CSS -->
+        <style>
+            @font-face {
+                font-family: 'Star Wars';
+                src: url('https://cdn.jsdelivr.net/gh/gerwld/Star-Wars-Intro-Creator/fonts/SfDistantGalaxy-0l3d.ttf');
+            }
+
+            .a-text {
+                font-family: 'Star Wars', monospace;
+            }
+        </style>
+
+        <!-- Add audio for ambiance -->
+        <audio id="background-music" src="https://cdn.jsdelivr.net/gh/gerwld/Star-Wars-Intro-Creator/audio/Star_Wars_original_opening_crawl_1977.mp3" preload="auto"></audio>
 
     </a-scene>
 
@@ -427,7 +468,7 @@
         <div class="loading-text">
             Loading AR Experience...
             <br><br>
-            <small>Tap anywhere to place the astronaut</small>
+            <small>A long time ago in a galaxy far, far away...</small>
         </div>
     </div>
 
@@ -520,6 +561,46 @@
         }
 
         scheduleNextShootingStar();
+
+        // Add audio controls
+        const audio = document.getElementById('background-music');
+        document.addEventListener('click', () => {
+            audio.play().catch(function(error) {
+                console.log("Audio play failed:", error);
+            });
+        });
+
+        // Enhance text crawl effect
+        const textContainer = document.getElementById('text-container');
+        const crawlText = document.getElementById('crawl-text');
+
+        function resetCrawl() {
+            crawlText.setAttribute('position', '0 0 0');
+            crawlText.setAttribute('opacity', '1');
+            
+            // Reset animations
+            const animations = crawlText.getAttribute('animation__position');
+            crawlText.setAttribute('animation__position', animations);
+            const opacityAnim = crawlText.getAttribute('animation__opacity');
+            crawlText.setAttribute('animation__opacity', opacityAnim);
+        }
+
+        // Reset crawl when it completes
+        crawlText.addEventListener('animationcomplete', function(evt) {
+            if (evt.detail.name === 'animation__position') {
+                resetCrawl();
+            }
+        });
+
+        // Make text more visible in AR
+        function updateTextVisibility() {
+            const distance = 15; // Adjust based on testing
+            crawlText.setAttribute('width', window.innerWidth > 768 ? 6 : 4);
+            textContainer.setAttribute('position', `0 0 ${distance}`);
+        }
+
+        window.addEventListener('resize', updateTextVisibility);
+        updateTextVisibility();
     </script>
 </body>
 </html> 
