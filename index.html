@@ -403,103 +403,107 @@
             wasd-controls-enabled="false">
         </a-entity>
 
-        <!-- Test Text Elements -->
+        <!-- Portfolio Content Container -->
         <a-entity position="0 0 -2">
-            <!-- Test 1: Basic Text -->
-            <a-text
-                value="Test 1: Basic Text"
-                position="0 2 0"
-                color="white"
-                scale="1 1 1">
-            </a-text>
-
-            <!-- Test 2: Text with Background -->
-            <a-entity position="0 1.5 0">
-                <a-plane
-                    color="black"
-                    width="2"
-                    height="0.5"
-                    position="0 0 -0.01">
-                </a-plane>
-                <a-text
-                    value="Test 2: Text with Background"
-                    position="-0.9 0.1 0"
-                    color="cyan"
-                    scale="0.5 0.5 0.5"
-                    anchor="left">
-                </a-text>
+            <!-- 3D Avatar -->
+            <a-entity
+                gltf-model="#avatar"
+                position="-1.5 0 0"
+                scale="0.5 0.5 0.5"
+                rotation="0 0 0"
+                animation-mixer="clip: *; timeScale: 0.5"
+                animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true">
             </a-entity>
 
-            <!-- Test 3: Larger Text -->
-            <a-text
-                value="Test 3: Large Text"
-                position="0 1 0"
-                color="#FF0000"
-                scale="2 2 2"
-                align="center">
-            </a-text>
+            <!-- Profile Card -->
+            <a-entity position="0.5 0 0">
+                <!-- Background Card -->
+                <a-plane 
+                    position="0 0 -0.1" 
+                    width="2.5" 
+                    height="3" 
+                    color="#1a1a1a"
+                    opacity="0.9">
+                </a-plane>
 
-            <!-- Test 4: Text with Different Properties -->
-            <a-text
-                value="Test 4: Different Properties"
-                position="0 0.5 0"
-                color="yellow"
-                scale="1 1 1"
-                baseline="top"
-                anchor="center"
-                width="2"
-                wrap-count="20">
-            </a-text>
-
-            <!-- Test 5: Text at Different Z-depth -->
-            <a-text
-                value="Test 5: Different Z-depth"
-                position="0 0 1"
-                color="green"
-                scale="1 1 1">
-            </a-text>
-        </a-entity>
-
-        <!-- Test Card with Text -->
-        <a-entity position="-2 1.6 -3">
-            <a-plane
-                color="#333333"
-                width="2"
-                height="3"
-                position="0 0 0">
-                
                 <!-- Header -->
-                <a-text
-                    value="Test Card Header"
-                    position="0 1.2 0.01"
-                    color="white"
-                    scale="0.5 0.5 0.5"
-                    align="center"
-                    anchor="center">
+                <a-text 
+                    value="AR/VR Developer"
+                    position="-1 1.2 0"
+                    color="#FF0000"
+                    scale="1 1 1"
+                    baseline="top"
+                    anchor="left">
                 </a-text>
 
-                <!-- Body Text -->
+                <!-- Title -->
                 <a-text
-                    value="This is a test card with multiple lines of text to check visibility and wrapping."
-                    position="0 0 0.01"
+                    value="Full Stack & Extended Reality"
+                    position="-1 0.9 0"
+                    color="yellow"
+                    scale="0.6 0.6 0.6"
+                    baseline="top"
+                    anchor="left">
+                </a-text>
+
+                <!-- About Me -->
+                <a-text
+                    value="About Me:"
+                    position="-1 0.6 0"
                     color="#4CC3D9"
-                    scale="0.3 0.3 0.3"
-                    align="center"
-                    anchor="center"
+                    scale="0.6 0.6 0.6"
+                    baseline="top"
+                    anchor="left">
+                </a-text>
+                <a-text
+                    value="Passionate developer crafting immersive AR/VR experiences and web applications. Specialized in creating interactive 3D content and innovative solutions."
+                    position="-1 0.3 0"
+                    color="cyan"
+                    scale="0.4 0.4 0.4"
                     width="4"
-                    wrap-count="30">
+                    wrap-count="30"
+                    baseline="top"
+                    anchor="left">
                 </a-text>
 
-                <!-- Footer -->
+                <!-- Skills -->
                 <a-text
-                    value="Test Card Footer"
-                    position="0 -1.2 0.01"
-                    color="white"
-                    scale="0.4 0.4 0.4"
-                    align="center"
-                    anchor="center">
+                    value="Technical Skills:"
+                    position="-1 -0.2 0"
+                    color="#4CC3D9"
+                    scale="0.6 0.6 0.6"
+                    baseline="top"
+                    anchor="left">
                 </a-text>
-            </a-plane>
+                <a-text
+                    value="• AR/VR Development\n• WebXR & Three.js\n• Full Stack (MERN)\n• 3D Modeling\n• UI/UX Design\n• Cloud Services"
+                    position="-1 -0.4 0"
+                    color="cyan"
+                    scale="0.4 0.4 0.4"
+                    baseline="top"
+                    anchor="left">
+                </a-text>
+
+                <!-- Contact -->
+                <a-text
+                    value="Let's Connect:"
+                    position="-1 -1 0"
+                    color="#4CC3D9"
+                    scale="0.6 0.6 0.6"
+                    baseline="top"
+                    anchor="left">
+                </a-text>
+                <a-text
+                    value="📧 developer@example.com\n🌐 portfolio.dev\n💼 github.com/developer"
+                    position="-1 -1.2 0"
+                    color="cyan"
+                    scale="0.4 0.4 0.4"
+                    baseline="top"
+                    anchor="left"
+                    class="clickable"
+                    clickable>
+                </a-text>
+            </a-entity>
         </a-entity>
 
     </a-scene>
