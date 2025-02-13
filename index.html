@@ -399,21 +399,67 @@
         </a-entity>
 
         <!-- Fixed Content -->
-        <a-entity position="0 0 -2">
-            <!-- Test Text Elements at Different Positions -->
-            <a-text value="Test 1: Direct Text" position="0 2 0" color="red" scale="2 2 2" align="center"></a-text>
+        <a-entity position="0 0 -4">
+            <!-- Test Text Elements with Enhanced Visibility -->
+            <a-text value="Test 1: RED TEXT" 
+                    position="0 2 0" 
+                    color="red" 
+                    scale="3 3 3" 
+                    align="center"
+                    material="shader: flat"
+                    render-order="9999"
+                    side="double"
+                    opacity="1"
+                    transparent="false"></a-text>
             
-            <a-text value="Test 2: With Background" position="0 1 0" color="white" scale="1 1 1" align="center">
-                <a-plane position="0 0 -0.01" width="2" height="0.5" color="black"></a-plane>
-            </a-text>
+            <a-entity position="0 1 0">
+                <a-plane position="0 0 -0.01" width="4" height="0.8" color="black" opacity="0.8"></a-plane>
+                <a-text value="Test 2: WHITE ON BLACK" 
+                        position="0 0 0" 
+                        color="white" 
+                        scale="2 2 2" 
+                        align="center"
+                        material="shader: flat"
+                        render-order="9999"
+                        side="double"></a-text>
+            </a-entity>
             
             <a-entity position="0 0 0">
-                <a-text value="Test 3: In Entity" position="0 0 0" color="yellow" scale="1.5 1.5 1.5" align="center"></a-text>
+                <a-text value="Test 3: BRIGHT YELLOW" 
+                        position="0 0 0" 
+                        color="#FFFF00" 
+                        scale="2.5 2.5 2.5" 
+                        align="center"
+                        material="shader: flat; opacity: 1"
+                        render-order="9999"
+                        side="double"
+                        transparent="false"></a-text>
             </a-entity>
 
-            <!-- Fixed Position Text -->
-            <a-text value="Test 4: Fixed Near" position="0 0 -1" color="cyan" scale="1 1 1" align="center"></a-text>
-            <a-text value="Test 5: Fixed Far" position="0 0 -3" color="green" scale="1 1 1" align="center"></a-text>
+            <!-- Fixed Position Text with Background -->
+            <a-entity position="0 -1 0">
+                <a-plane position="0 0 -0.01" width="5" height="0.8" color="#000066" opacity="0.8"></a-plane>
+                <a-text value="Test 4: CYAN WITH BACKGROUND" 
+                        position="0 0 0" 
+                        color="#00FFFF" 
+                        scale="1.5 1.5 1.5" 
+                        align="center"
+                        material="shader: flat"
+                        render-order="9999"
+                        side="double"></a-text>
+            </a-entity>
+
+            <a-entity position="0 -2 0">
+                <a-plane position="0 0 -0.01" width="4" height="0.8" color="#003300" opacity="0.8"></a-plane>
+                <a-text value="Test 5: GREEN WITH BACKGROUND" 
+                        position="0 0 0" 
+                        color="#00FF00" 
+                        scale="1.5 1.5 1.5" 
+                        align="center"
+                        material="shader: flat"
+                        render-order="9999"
+                        side="double"></a-text>
+            </a-entity>
 
             <!-- Avatar with Ground Effects -->
             <a-entity
