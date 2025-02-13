@@ -311,28 +311,83 @@
 </head>
 <body style="margin: 0; overflow: hidden;">
     <a-scene
-        ar-scene-manager
         vr-mode-ui="enabled: false"
-        renderer="antialias: true; logarithmicDepthBuffer: true; precision: mediump; powerPreference: high-performance"
-        loading="enabled: false">
+        renderer="antialias: true; logarithmicDepthBuffer: true; precision: mediump">
         
         <a-assets timeout="30000">
             <a-asset-item id="avatar" src="https://cdn.glitch.com/36cb8393-65c6-408d-a538-055ada20431b/Astronaut.glb?v=1542147958948"></a-asset-item>
             <img id="particle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjQ5MkVGRDY5QzM3QzExRUE5RkZDQTJGMzQ5QjY1REE4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjQ5MkVGRDZBQzM3QzExRUE5RkZDQTJGMzQ5QjY1REE4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NDkyRUZENjdDMzdDMTFFQTlGRkNBMkYzNDlCNjVEQTgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NDkyRUZENjhDMzdDMTFFQTlGRkNBMkYzNDlCNjVEQTgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4zD1ZIAAAAZklEQVR42mL8//8/w0ACJoYBBqMOGHXAqANGHTDqgFEHjDpg1AGjDhh1wKgDRh0w6oBRB4w6YNQBow4YdcCoA0YdMOqAUQeMOmDUAaMOGHXAqANGHTDqgFEHjDpg1AEDDgACDABh/nutdcFPRAAAAABJRU5ErkJggg==">
+            <!-- Planet Textures -->
+            <img id="mars-texture" src="https://cdn.glitch.global/your-path/mars-texture.jpg">
+            <img id="ice-planet-texture" src="https://cdn.glitch.global/your-path/ice-planet.jpg">
+            <img id="gas-giant-texture" src="https://cdn.glitch.global/your-path/gas-giant.jpg">
         </a-assets>
 
         <!-- Enhanced Sky with Stars and Planets -->
         <a-sky color="#000000">
             <!-- Star System -->
-            <a-entity position="0 0 0" star-system="count: 2000; radius: 250; depth: 0; size: 0.1, 0.5"></a-entity>
+            <a-entity position="0 0 0" star-system="count: 500; radius: 250; depth: 0; size: 0.1, 0.3"></a-entity>
             
-            <!-- Planets -->
-            <a-sphere position="-50 30 -100" radius="5" material="shader: flat; color: #FF6B6B" planet="speed: 0.01"></a-sphere>
-            <a-sphere position="70 -20 -150" radius="8" material="shader: flat; color: #4ECDC4" planet="speed: 0.015"></a-sphere>
-            <a-sphere position="-30 -40 -200" radius="12" material="shader: flat; color: #FFE66D" planet="speed: 0.008"></a-sphere>
-            
-            <!-- Shooting Stars Container -->
-            <a-entity id="shooting-stars"></a-entity>
+            <!-- Realistic Planets -->
+            <a-sphere position="-50 30 -100" radius="5"
+                material="shader: standard; 
+                         roughness: 0.7;
+                         metalness: 0.3;
+                         color: #FF6B6B;
+                         emissive: #441111;
+                         emissiveIntensity: 0.2"
+                planet="speed: 0.01"
+                animation="property: rotation; to: 0 360 0; dur: 20000; easing: linear; loop: true">
+                <!-- Atmosphere glow -->
+                <a-sphere radius="5.2"
+                    material="shader: standard;
+                             opacity: 0.3;
+                             transparent: true;
+                             emissive: #FF6B6B;
+                             emissiveIntensity: 0.5">
+                </a-sphere>
+            </a-sphere>
+
+            <a-sphere position="70 -20 -150" radius="8"
+                material="shader: standard;
+                         roughness: 0.5;
+                         metalness: 0.5;
+                         color: #4ECDC4;
+                         emissive: #114444;
+                         emissiveIntensity: 0.3"
+                planet="speed: 0.015"
+                animation="property: rotation; to: 0 360 0; dur: 25000; easing: linear; loop: true">
+                <!-- Ice rings -->
+                <a-ring position="0 0 0"
+                    rotation="80 0 0"
+                    radius-inner="10"
+                    radius-outer="15"
+                    material="shader: standard;
+                             color: #A5F2EA;
+                             opacity: 0.6;
+                             transparent: true;
+                             side: double">
+                </a-ring>
+            </a-sphere>
+
+            <a-sphere position="-30 -40 -200" radius="12"
+                material="shader: standard;
+                         roughness: 0.3;
+                         metalness: 0.7;
+                         color: #FFE66D;
+                         emissive: #443311;
+                         emissiveIntensity: 0.4"
+                planet="speed: 0.008"
+                animation="property: rotation; to: 0 360 0; dur: 30000; easing: linear; loop: true">
+                <!-- Atmosphere glow -->
+                <a-sphere radius="12.4"
+                    material="shader: standard;
+                             opacity: 0.2;
+                             transparent: true;
+                             emissive: #FFE66D;
+                             emissiveIntensity: 0.3">
+                </a-sphere>
+            </a-sphere>
         </a-sky>
 
         <!-- Camera with controls -->
@@ -343,20 +398,8 @@
             wasd-controls-enabled="false">
         </a-entity>
 
-        <!-- Grid Floor -->
-        <a-grid
-            material="shader: flat; color: #2A3B4C; opacity: 0.3"
-            rotation="-90 0 0"
-            position="0 -0.1 0"
-            scale="5 5 5"
-            animation="property: material.opacity; to: 0.4; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
-        </a-grid>
-
-        <!-- Main Content Container -->
+        <!-- Fixed Content -->
         <a-entity position="0 0 -2">
-            <!-- Ambient Particles -->
-            <a-entity particle-system="preset: dust; particleCount: 50; color: #2A3B4C,#4A90E2; size: 0.02,0.05; texture: #particle; velocityValue: 0.05 0.05 0.05; accelerationValue: 0 -0.01 0"></a-entity>
-
             <!-- Avatar with Ground Effects -->
             <a-entity
                 gltf-model="#avatar"
@@ -371,7 +414,7 @@
                     rotation="-90 0 0"
                     radius-inner="0.5"
                     radius-outer="1"
-                    material="shader: flat; color: #4A90E2; opacity: 0.3"
+                    material="shader: standard; color: #4A90E2; opacity: 0.3; transparent: true; emissive: #4A90E2; emissiveIntensity: 0.5"
                     animation="property: material.opacity; to: 0.1; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
                 </a-ring>
             </a-entity>
@@ -392,10 +435,10 @@
         // Star system component with enhanced features
         AFRAME.registerComponent('star-system', {
             schema: {
-                count: { type: 'number', default: 2000 },
+                count: { type: 'number', default: 500 },
                 radius: { type: 'number', default: 250 },
                 depth: { type: 'number', default: 0 },
-                size: { type: 'array', default: [0.1, 0.5] }
+                size: { type: 'array', default: [0.1, 0.3] }
             },
             init: function () {
                 let material = new THREE.PointsMaterial({
@@ -407,6 +450,7 @@
                 });
                 let geometry = new THREE.BufferGeometry();
                 let positions = [];
+                let colors = [];
                 
                 for (let i = 0; i < this.data.count; i++) {
                     const radius = THREE.MathUtils.randFloat(0, this.data.radius);
@@ -418,51 +462,64 @@
                         radius * Math.sin(phi) * Math.sin(theta),
                         radius * Math.cos(phi)
                     );
+
+                    // Random star colors (white to slight blue)
+                    colors.push(1, 1, THREE.MathUtils.randFloat(0.9, 1));
                 }
                 
                 geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+                material.vertexColors = true;
+                
                 this.el.setObject3D('star-system', new THREE.Points(geometry, material));
             }
         });
 
-        // Planet rotation component
-        AFRAME.registerComponent('planet', {
-            schema: {
-                speed: { type: 'number', default: 0.01 }
-            },
-            tick: function () {
-                this.el.object3D.rotation.y += this.data.speed;
-            }
-        });
-
-        // Shooting star system
+        // Enhanced shooting star system
         function createShootingStar() {
             const star = document.createElement('a-entity');
             const startX = Math.random() * 400 - 200;
             const startY = Math.random() * 200 + 50;
             const startZ = -200;
             
+            // Create trail effect
             star.setAttribute('position', `${startX} ${startY} ${startZ}`);
             star.setAttribute('particle-system', {
                 preset: 'streak',
-                particleCount: 20,
-                color: '#FFF',
+                particleCount: 50,
+                color: ['#FFF', '#99f', '#aaf'],
                 size: 0.2,
-                velocity: '2 -1 1',
-                acceleration: '0 -2 0',
+                velocity: '-3 -2 1',
+                acceleration: '0 -4 0',
                 lifetime: 1,
-                opacity: { value: 1, spread: 0 }
+                opacity: { value: [0.8, 0] }
+            });
+
+            // Animate position
+            star.setAttribute('animation', {
+                property: 'position',
+                to: `${startX - 100} ${startY - 100} ${startZ + 50}`,
+                dur: 1000,
+                easing: 'linear'
             });
 
             document.querySelector('#shooting-stars').appendChild(star);
             
             setTimeout(() => {
                 star.parentNode.removeChild(star);
-            }, 2000);
+            }, 1000);
         }
 
-        // Create shooting stars periodically
-        setInterval(createShootingStar, 3000);
+        // Create shooting stars with random intervals
+        function scheduleNextShootingStar() {
+            const delay = Math.random() * 5000 + 2000; // Random delay between 2-7 seconds
+            setTimeout(() => {
+                createShootingStar();
+                scheduleNextShootingStar();
+            }, delay);
+        }
+
+        scheduleNextShootingStar();
     </script>
 </body>
 </html> 
