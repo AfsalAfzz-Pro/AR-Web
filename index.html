@@ -322,6 +322,12 @@
             <img id="particle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjQ5MkVGRDY5QzM3QzExRUE5RkZDQTJGMzQ5QjY1REE4IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjQ5MkVGRDZBQzM3QzExRUE5RkZDQTJGMzQ5QjY1REE4Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NDkyRUZENjdDMzdDMTFFQTlGRkNBMkYzNDlCNjVEQTgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NDkyRUZENjhDMzdDMTFFQTlGRkNBMkYzNDlCNjVEQTgiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4zD1ZIAAAAZklEQVR42mL8//8/w0ACJoYBBqMOGHXAqANGHTDqgFEHjDpg1AGjDhh1wKgDRh0w6oBRB4w6YNQBow4YdcCoA0YdMOqAUQeMOmDUAaMOGHXAqANGHTDqgFEHjDpg1AEDDgACDABh/nutdcFPRAAAAABJRU5ErkJggg==">
         </a-assets>
 
+        <!-- Sky with stars -->
+        <a-sky color="#000000">
+            <!-- Generate random stars -->
+            <a-entity position="0 0 0" star-system="count: 1000; radius: 250; depth: 0; size: 0.1, 0.5"></a-entity>
+        </a-sky>
+
         <!-- Camera with controls -->
         <a-entity 
             camera
@@ -332,17 +338,17 @@
 
         <!-- Grid Floor -->
         <a-grid
-            material="shader: flat; color: #4CC3D9; opacity: 0.2"
+            material="shader: flat; color: #2A3B4C; opacity: 0.3"
             rotation="-90 0 0"
             position="0 -0.1 0"
             scale="5 5 5"
-            animation="property: material.opacity; to: 0.3; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
+            animation="property: material.opacity; to: 0.4; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
         </a-grid>
 
         <!-- Main Content Container -->
         <a-entity position="0 0 -2">
             <!-- Particle System -->
-            <a-entity particle-system="preset: dust; particleCount: 100; color: #4CC3D9,#ff9500; size: 0.05,0.1; texture: #particle; velocityValue: 0.1 0.1 0.1; accelerationValue: 0 -0.02 0"></a-entity>
+            <a-entity particle-system="preset: dust; particleCount: 50; color: #2A3B4C,#4A90E2; size: 0.02,0.05; texture: #particle; velocityValue: 0.05 0.05 0.05; accelerationValue: 0 -0.01 0"></a-entity>
 
             <!-- Code Editor Panel -->
             <a-entity position="-2 0.5 0">
@@ -351,19 +357,18 @@
                     width="2"
                     height="2.5"
                     color="#1E1E1E"
-                    opacity="0.9"
-                    animation="property: material.opacity; to: 0.95; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
+                    material="transparent: true; opacity: 0.95">
                 </a-plane>
                 <!-- Code Content -->
                 <a-text
                     value="class Developer {\n  constructor() {\n    this.skills = [\n      'WebXR',\n      'Three.js'\n    ];\n  }\n}"
                     position="-0.9 0.9 0.01"
-                    color="#61AFEF"
+                    color="#4A90E2"
                     scale="0.3 0.3 0.3"
                     font="monospace"
                     baseline="top"
                     anchor="left"
-                    animation__glow="property: color; to: #88C0D0; dur: 3000; dir: alternate; easing: easeInOutQuad; loop: true">
+                    animation__glow="property: color; to: #5FA3E3; dur: 3000; dir: alternate; easing: easeInOutQuad; loop: true">
                 </a-text>
             </a-entity>
 
@@ -373,12 +378,12 @@
                     width="2"
                     height="0.8"
                     color="#000000"
-                    opacity="0.9">
+                    material="transparent: true; opacity: 0.95">
                 </a-plane>
                 <a-text
                     value="> npm start\n[INFO] Building WebXR experience...\n[SUCCESS] Ready! ✨"
                     position="-0.9 0.3 0.01"
-                    color="#98C379"
+                    color="#7CB342"
                     scale="0.25 0.25 0.25"
                     font="monospace"
                     baseline="top"
@@ -392,12 +397,12 @@
                     width="1"
                     height="3.5"
                     color="#21252B"
-                    opacity="0.9">
+                    material="transparent: true; opacity: 0.95">
                 </a-plane>
                 <a-text
                     value="📁 main\n✨ 3 changed\n✅ staged\n🔄 synced"
                     position="-0.4 1.5 0.01"
-                    color="#E5C07B"
+                    color="#F5C518"
                     scale="0.25 0.25 0.25"
                     baseline="top"
                     anchor="left">
@@ -411,26 +416,16 @@
                     position="0 0 -0.1"
                     radius-inner="0.8"
                     radius-outer="1"
-                    material="shader: flat; color: #4CC3D9; opacity: 0.5"
+                    material="shader: flat; color: #4A90E2; opacity: 0.3"
                     animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true">
                 </a-ring>
                 <a-ring
                     position="0 0 -0.05"
                     radius-inner="0.6"
                     radius-outer="0.7"
-                    material="shader: flat; color: #ff9500; opacity: 0.3"
+                    material="shader: flat; color: #2A3B4C; opacity: 0.3"
                     animation="property: rotation; to: 0 -360 0; dur: 8000; easing: linear; loop: true">
                 </a-ring>
-
-                <!-- 3D Avatar -->
-                <a-entity
-                    gltf-model="#avatar"
-                    position="0 0 0"
-                    scale="0.7 0.7 0.7"
-                    animation-mixer="clip: *; timeScale: 0.5"
-                    animation__rotate="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true"
-                    animation__float="property: position; to: 0 0.1 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
-                </a-entity>
 
                 <!-- Info Panel -->
                 <a-entity position="1.5 0 0">
@@ -438,11 +433,11 @@
                     <a-text 
                         value="John Developer"
                         position="0 1.2 0"
-                        color="#FF0000"
+                        color="#4A90E2"
                         scale="1 1 1"
                         align="center"
                         animation__float="property: position; to: 0 1.3 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true"
-                        animation__glow="property: color; to: #ff6b6b; dur: 1500; dir: alternate; easing: easeInOutQuad; loop: true">
+                        animation__glow="property: color; to: #5FA3E3; dur: 1500; dir: alternate; easing: easeInOutQuad; loop: true">
                     </a-text>
 
                     <!-- Skills -->
@@ -450,11 +445,11 @@
                         animation__float="property: position; to: 0 0.6 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
                         <a-text
                             value="⚡ WebXR Expert\n🎮 Three.js Dev\n🌐 Full Stack\n🎨 UI/UX Design"
-                            color="cyan"
+                            color="#7CB342"
                             scale="0.4 0.4 0.4"
                             align="center"
                             baseline="center"
-                            animation__glow="property: color; to: #66ffff; dur: 2500; dir: alternate; easing: easeInOutQuad; loop: true">
+                            animation__glow="property: color; to: #8BC34A; dur: 2500; dir: alternate; easing: easeInOutQuad; loop: true">
                         </a-text>
                     </a-entity>
 
@@ -463,7 +458,7 @@
                         animation__float="property: position; to: 0 -0.4 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
                         <a-text
                             value="📧 contact@dev.io\n🌐 dev.portfolio\n💼 github.com/dev"
-                            color="#4CC3D9"
+                            color="#F5C518"
                             scale="0.35 0.35 0.35"
                             align="center"
                             baseline="center"
@@ -479,7 +474,7 @@
             <a-entity position="0 -1.5 0">
                 <a-text
                     value="👆 Tap to interact | 🤏 Pinch to scale"
-                    color="#4CC3D9"
+                    color="#4A90E2"
                     align="center"
                     scale="0.3 0.3 0.3"
                     animation="property: opacity; from: 1; to: 0.5; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
@@ -497,5 +492,41 @@
             <small>Tap anywhere to place the profile card</small>
         </div>
     </div>
+
+    <script>
+        // Star system component for the sky
+        AFRAME.registerComponent('star-system', {
+            schema: {
+                count: { type: 'number', default: 1000 },
+                radius: { type: 'number', default: 250 },
+                depth: { type: 'number', default: 0 },
+                size: { type: 'array', default: [0.1, 0.5] }
+            },
+            init: function () {
+                let material = new THREE.PointsMaterial({
+                    color: 0xFFFFFF,
+                    size: this.data.size[0],
+                    sizeAttenuation: true
+                });
+                let geometry = new THREE.BufferGeometry();
+                let positions = [];
+                
+                for (let i = 0; i < this.data.count; i++) {
+                    const radius = THREE.MathUtils.randFloat(0, this.data.radius);
+                    const theta = THREE.MathUtils.randFloat(0, Math.PI * 2);
+                    const phi = THREE.MathUtils.randFloat(0, Math.PI);
+                    
+                    positions.push(
+                        radius * Math.sin(phi) * Math.cos(theta),
+                        radius * Math.sin(phi) * Math.sin(theta),
+                        radius * Math.cos(phi)
+                    );
+                }
+                
+                geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+                this.el.setObject3D('star-system', new THREE.Points(geometry, material));
+            }
+        });
+    </script>
 </body>
 </html> 
