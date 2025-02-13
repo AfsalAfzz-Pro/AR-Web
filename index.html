@@ -401,64 +401,57 @@
         <!-- Fixed Content -->
         <a-entity position="0 0 -4">
             <!-- Test Text Elements with Enhanced Visibility -->
-            <a-text value="Test 1: RED TEXT" 
-                    position="0 2 0" 
-                    color="red" 
-                    scale="3 3 3" 
-                    align="center"
-                    material="shader: flat"
-                    render-order="9999"
-                    side="double"
-                    opacity="1"
-                    transparent="false"></a-text>
+            <a-entity position="0 2 0" look-at="[camera]">
+                <a-text value="Test 1: RED TEXT" 
+                        position="0 0 0" 
+                        color="red" 
+                        scale="3 3 3" 
+                        align="center"
+                        material="shader: flat; emissive: red; emissiveIntensity: 2"
+                        billboard></a-text>
+            </a-entity>
             
-            <a-entity position="0 1 0">
+            <a-entity position="0 1 0" look-at="[camera]">
                 <a-plane position="0 0 -0.01" width="4" height="0.8" color="black" opacity="0.8"></a-plane>
                 <a-text value="Test 2: WHITE ON BLACK" 
                         position="0 0 0" 
                         color="white" 
                         scale="2 2 2" 
                         align="center"
-                        material="shader: flat"
-                        render-order="9999"
-                        side="double"></a-text>
+                        material="shader: flat; emissive: white; emissiveIntensity: 2"
+                        billboard></a-text>
             </a-entity>
             
-            <a-entity position="0 0 0">
+            <a-entity position="0 0 0" look-at="[camera]">
                 <a-text value="Test 3: BRIGHT YELLOW" 
                         position="0 0 0" 
                         color="#FFFF00" 
                         scale="2.5 2.5 2.5" 
                         align="center"
-                        material="shader: flat; opacity: 1"
-                        render-order="9999"
-                        side="double"
-                        transparent="false"></a-text>
+                        material="shader: flat; emissive: #FFFF00; emissiveIntensity: 2"
+                        billboard></a-text>
             </a-entity>
 
-            <!-- Fixed Position Text with Background -->
-            <a-entity position="0 -1 0">
+            <a-entity position="0 -1 0" look-at="[camera]">
                 <a-plane position="0 0 -0.01" width="5" height="0.8" color="#000066" opacity="0.8"></a-plane>
                 <a-text value="Test 4: CYAN WITH BACKGROUND" 
                         position="0 0 0" 
                         color="#00FFFF" 
                         scale="1.5 1.5 1.5" 
                         align="center"
-                        material="shader: flat"
-                        render-order="9999"
-                        side="double"></a-text>
+                        material="shader: flat; emissive: #00FFFF; emissiveIntensity: 2"
+                        billboard></a-text>
             </a-entity>
 
-            <a-entity position="0 -2 0">
+            <a-entity position="0 -2 0" look-at="[camera]">
                 <a-plane position="0 0 -0.01" width="4" height="0.8" color="#003300" opacity="0.8"></a-plane>
                 <a-text value="Test 5: GREEN WITH BACKGROUND" 
                         position="0 0 0" 
                         color="#00FF00" 
                         scale="1.5 1.5 1.5" 
                         align="center"
-                        material="shader: flat"
-                        render-order="9999"
-                        side="double"></a-text>
+                        material="shader: flat; emissive: #00FF00; emissiveIntensity: 2"
+                        billboard></a-text>
             </a-entity>
 
             <!-- Avatar with Ground Effects -->
