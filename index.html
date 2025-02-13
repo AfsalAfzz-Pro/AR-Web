@@ -49,131 +49,58 @@
                     <a-entity
                         gltf-model="#avatar"
                         position="0 0 0"
-                        scale="0.5 0.5 0.5"
+                        scale="0.7 0.7 0.7"
                         rotation="0 0 0"
                         animation-mixer="clip: *; timeScale: 0.5"
                         animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true">
                     </a-entity>
 
-                    <!-- Profile Information Card -->
-                    <a-entity position="1 0.5 0">
-                        <!-- Background Card -->
-                        <a-plane 
-                            position="0 0 -0.1" 
-                            width="2" 
-                            height="3" 
-                            color="#1a1a1a"
-                            opacity="0.9"
-                            animation="property: scale; to: 1.05 1.05 1.05; dur: 2000; easing: easeInOutQuad; loop: true; dir: alternate">
-                        </a-plane>
-
-                        <!-- Profile Picture -->
-                        <a-circle
-                            position="0 1.2 0.01"
-                            radius="0.3"
-                            src="#profile-img"
-                            class="clickable"
-                            clickable>
-                        </a-circle>
-
-                        <!-- Name with Color Toggle -->
+                    <!-- Floating Text Elements -->
+                    <a-entity position="1.2 0.8 0">
+                        <!-- Name -->
                         <a-text 
-                            value="AR/VR Developer"
-                            position="-0.8 0.7 0.01"
-                            color="#4CC3D9"
-                            scale="0.8 0.8 0.8"
-                            baseline="top"
-                            anchor="left"
-                            color-toggle>
+                            value="John Developer"
+                            position="0 0.6 0"
+                            color="#FF0000"
+                            scale="1 1 1"
+                            align="center"
+                            animation="property: position; to: 0 0.7 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
                         </a-text>
 
                         <!-- Title -->
                         <a-text
-                            value="Full Stack & Extended Reality"
-                            position="-0.8 0.5 0.01"
-                            color="#FFF"
-                            scale="0.5 0.5 0.5"
-                            baseline="top"
-                            anchor="left">
+                            value="AR/VR Developer & Designer"
+                            position="0 0.2 0"
+                            color="yellow"
+                            scale="0.6 0.6 0.6"
+                            align="center"
+                            animation="property: position; to: 0 0.3 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true; delay: 200">
                         </a-text>
 
-                        <!-- About Me -->
-                        <a-entity position="-0.8 0.2 0.01">
-                            <a-text
-                                value="About Me:"
-                                position="0 0 0"
-                                color="#4CC3D9"
-                                scale="0.5 0.5 0.5"
-                                baseline="top"
-                                anchor="left">
-                            </a-text>
-                            <a-text
-                                value="Passionate developer crafting immersive AR/VR experiences and web applications. Specialized in creating interactive 3D content and innovative solutions."
-                                position="0 -0.15 0"
-                                color="#FFF"
-                                scale="0.35 0.35 0.35"
-                                width="4"
-                                wrap-count="30"
-                                baseline="top"
-                                anchor="left">
-                            </a-text>
-                        </a-entity>
-
                         <!-- Skills -->
-                        <a-entity position="-0.8 -0.3 0.01">
+                        <a-entity position="0 -0.3 0"
+                            animation="property: position; to: 0 -0.2 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true; delay: 400">
                             <a-text
-                                value="Technical Skills:"
-                                position="0 0 0"
-                                color="#4CC3D9"
-                                scale="0.5 0.5 0.5"
-                                baseline="top"
-                                anchor="left">
-                            </a-text>
-                            <a-text
-                                value="• AR/VR Development (Unity, A-Frame)\n• WebXR, Three.js, AR.js\n• Full Stack (MERN Stack)\n• 3D Modeling & Animation\n• UI/UX Design\n• Cloud Services (AWS, Azure)"
-                                position="0 -0.15 0"
-                                color="#FFF"
-                                scale="0.35 0.35 0.35"
-                                width="4"
-                                wrap-count="35"
-                                baseline="top"
-                                anchor="left">
+                                value="⚡ WebXR\n🎮 Three.js\n🌐 Full Stack\n🎨 3D Design"
+                                color="cyan"
+                                scale="0.4 0.4 0.4"
+                                align="center"
+                                baseline="center">
                             </a-text>
                         </a-entity>
 
-                        <!-- Contact -->
-                        <a-entity position="-0.8 -0.8 0.01">
+                        <!-- Social Links -->
+                        <a-entity position="0 -1 0"
+                            animation="property: position; to: 0 -0.9 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true; delay: 600">
                             <a-text
-                                value="Let's Connect:"
-                                position="0 0 0"
+                                value="📧 hello@example.com\n🌐 portfolio.dev\n💼 github.com/dev"
                                 color="#4CC3D9"
-                                scale="0.5 0.5 0.5"
-                                baseline="top"
-                                anchor="left">
-                            </a-text>
-                            <a-text
-                                value="📧 developer@example.com\n🌐 portfolio.dev\n📱 @xr_developer\n💼 github.com/developer"
-                                position="0 -0.15 0"
-                                color="#FFF"
                                 scale="0.35 0.35 0.35"
-                                width="4"
-                                wrap-count="35"
-                                baseline="top"
-                                anchor="left"
+                                align="center"
+                                baseline="center"
                                 class="clickable"
                                 clickable>
                             </a-text>
-                        </a-entity>
-
-                        <!-- Button -->
-                        <a-entity
-                            position="0 -1.2 0.01"
-                            geometry="primitive: plane; width: 1.5; height: 0.3"
-                            material="color: #4CC3D9"
-                            text="value: View Portfolio; align: center; color: white; width: 4; zOffset: 0.01"
-                            animation="property: material.color; to: #ff9500; dur: 1000; dir: alternate; loop: true"
-                            class="clickable"
-                            clickable>
                         </a-entity>
                     </a-entity>
                 `;
@@ -392,7 +319,6 @@
         
         <a-assets timeout="30000">
             <a-asset-item id="avatar" src="https://cdn.glitch.com/36cb8393-65c6-408d-a538-055ada20431b/Astronaut.glb?v=1542147958948"></a-asset-item>
-            <img id="profile-img" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg" crossorigin="anonymous">
         </a-assets>
 
         <!-- Camera with controls -->
@@ -403,106 +329,65 @@
             wasd-controls-enabled="false">
         </a-entity>
 
-        <!-- Portfolio Content Container -->
+        <!-- Floating Content Container -->
         <a-entity position="0 0 -2">
             <!-- 3D Avatar -->
             <a-entity
                 gltf-model="#avatar"
-                position="-1.5 0 0"
-                scale="0.5 0.5 0.5"
+                position="0 0 0"
+                scale="0.7 0.7 0.7"
                 rotation="0 0 0"
                 animation-mixer="clip: *; timeScale: 0.5"
                 animation="property: rotation; to: 0 360 0; dur: 10000; easing: linear; loop: true">
             </a-entity>
 
-            <!-- Profile Card -->
-            <a-entity position="0.5 0 0">
-                <!-- Background Card -->
-                <a-plane 
-                    position="0 0 -0.1" 
-                    width="2.5" 
-                    height="3" 
-                    color="#1a1a1a"
-                    opacity="0.9">
-                </a-plane>
-
-                <!-- Header -->
+            <!-- Floating Text Elements -->
+            <a-entity position="1.2 0.8 0">
+                <!-- Name -->
                 <a-text 
-                    value="AR/VR Developer"
-                    position="-1 1.2 0"
+                    value="John Developer"
+                    position="0 0.6 0"
                     color="#FF0000"
                     scale="1 1 1"
-                    baseline="top"
-                    anchor="left">
+                    align="center"
+                    animation="property: position; to: 0 0.7 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true">
                 </a-text>
 
                 <!-- Title -->
                 <a-text
-                    value="Full Stack & Extended Reality"
-                    position="-1 0.9 0"
+                    value="AR/VR Developer & Designer"
+                    position="0 0.2 0"
                     color="yellow"
                     scale="0.6 0.6 0.6"
-                    baseline="top"
-                    anchor="left">
-                </a-text>
-
-                <!-- About Me -->
-                <a-text
-                    value="About Me:"
-                    position="-1 0.6 0"
-                    color="#4CC3D9"
-                    scale="0.6 0.6 0.6"
-                    baseline="top"
-                    anchor="left">
-                </a-text>
-                <a-text
-                    value="Passionate developer crafting immersive AR/VR experiences and web applications. Specialized in creating interactive 3D content and innovative solutions."
-                    position="-1 0.3 0"
-                    color="cyan"
-                    scale="0.4 0.4 0.4"
-                    width="4"
-                    wrap-count="30"
-                    baseline="top"
-                    anchor="left">
+                    align="center"
+                    animation="property: position; to: 0 0.3 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true; delay: 200">
                 </a-text>
 
                 <!-- Skills -->
-                <a-text
-                    value="Technical Skills:"
-                    position="-1 -0.2 0"
-                    color="#4CC3D9"
-                    scale="0.6 0.6 0.6"
-                    baseline="top"
-                    anchor="left">
-                </a-text>
-                <a-text
-                    value="• AR/VR Development\n• WebXR & Three.js\n• Full Stack (MERN)\n• 3D Modeling\n• UI/UX Design\n• Cloud Services"
-                    position="-1 -0.4 0"
-                    color="cyan"
-                    scale="0.4 0.4 0.4"
-                    baseline="top"
-                    anchor="left">
-                </a-text>
+                <a-entity position="0 -0.3 0"
+                    animation="property: position; to: 0 -0.2 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true; delay: 400">
+                    <a-text
+                        value="⚡ WebXR\n🎮 Three.js\n🌐 Full Stack\n🎨 3D Design"
+                        color="cyan"
+                        scale="0.4 0.4 0.4"
+                        align="center"
+                        baseline="center">
+                    </a-text>
+                </a-entity>
 
-                <!-- Contact -->
-                <a-text
-                    value="Let's Connect:"
-                    position="-1 -1 0"
-                    color="#4CC3D9"
-                    scale="0.6 0.6 0.6"
-                    baseline="top"
-                    anchor="left">
-                </a-text>
-                <a-text
-                    value="📧 developer@example.com\n🌐 portfolio.dev\n💼 github.com/developer"
-                    position="-1 -1.2 0"
-                    color="cyan"
-                    scale="0.4 0.4 0.4"
-                    baseline="top"
-                    anchor="left"
-                    class="clickable"
-                    clickable>
-                </a-text>
+                <!-- Social Links -->
+                <a-entity position="0 -1 0"
+                    animation="property: position; to: 0 -0.9 0; dur: 2000; dir: alternate; easing: easeInOutQuad; loop: true; delay: 600">
+                    <a-text
+                        value="📧 hello@example.com\n🌐 portfolio.dev\n💼 github.com/dev"
+                        color="#4CC3D9"
+                        scale="0.35 0.35 0.35"
+                        align="center"
+                        baseline="center"
+                        class="clickable"
+                        clickable>
+                    </a-text>
+                </a-entity>
             </a-entity>
         </a-entity>
 
