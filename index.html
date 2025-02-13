@@ -400,6 +400,21 @@
 
         <!-- Fixed Content -->
         <a-entity position="0 0 -2">
+            <!-- Test Text Elements at Different Positions -->
+            <a-text value="Test 1: Direct Text" position="0 2 0" color="red" scale="2 2 2" align="center"></a-text>
+            
+            <a-text value="Test 2: With Background" position="0 1 0" color="white" scale="1 1 1" align="center">
+                <a-plane position="0 0 -0.01" width="2" height="0.5" color="black"></a-plane>
+            </a-text>
+            
+            <a-entity position="0 0 0">
+                <a-text value="Test 3: In Entity" position="0 0 0" color="yellow" scale="1.5 1.5 1.5" align="center"></a-text>
+            </a-entity>
+
+            <!-- Fixed Position Text -->
+            <a-text value="Test 4: Fixed Near" position="0 0 -1" color="cyan" scale="1 1 1" align="center"></a-text>
+            <a-text value="Test 5: Fixed Far" position="0 0 -3" color="green" scale="1 1 1" align="center"></a-text>
+
             <!-- Avatar with Ground Effects -->
             <a-entity
                 gltf-model="#avatar"
@@ -419,52 +434,21 @@
                 </a-ring>
             </a-entity>
 
-            <!-- Star Wars Style Text Crawl - Adjusted positioning and timing -->
-            <a-entity id="text-container" position="0 1 -4" rotation="-30 0 0">
-                <!-- Background plane for better text visibility -->
-                <a-plane
-                    position="0 0 -0.1"
-                    width="8"
-                    height="12"
-                    material="shader: flat; color: #000000; opacity: 0.7; transparent: true">
+            <!-- Test Card with Different Text Styles -->
+            <a-entity position="-2 1.6 -3">
+                <a-plane width="2" height="2" color="#333333">
+                    <a-text value="Header Text" position="0 0.7 0.01" color="white" align="center" scale="0.5 0.5 0.5"></a-text>
+                    <a-text value="Body content here\nMultiple lines\nof text" position="0 0 0.01" color="yellow" align="center" scale="0.3 0.3 0.3"></a-text>
+                    <a-text value="Footer Text" position="0 -0.7 0.01" color="cyan" align="center" scale="0.4 0.4 0.4"></a-text>
                 </a-plane>
-                
-                <a-text id="crawl-text"
-                    value="JOHN DOE\n\nFULL STACK DEVELOPER\n\n\nAs a Full Stack Developer based in Alappuzha, Kerala, I specialize in building scalable web applications and integrating AI solutions. With experience in both frontend and backend development, I've successfully delivered multiple client projects and automated solutions that significantly improve efficiency.\n\n\nGitHub: github.com/johndoe\nLinkedIn: linkedin.com/in/johndoe\nEmail: john@example.com"
-                    color="#FFE81F"
-                    width="6"
-                    align="center"
-                    anchor="center"
-                    baseline="center"
-                    scale="1 1 1"
-                    material="shader: flat; opacity: 1"
-                    animation__position="property: position; from: 0 -6 0; to: 0 15 0; dur: 60000; easing: linear; loop: true"
-                    animation__opacity="property: opacity; from: 1; to: 1; dur: 60000; easing: linear; loop: true">
-                </a-text>
             </a-entity>
 
-            <!-- Star Wars Logo Effect - Adjusted for better visibility -->
-            <a-entity id="logo-container" position="0 2 -3">
-                <!-- Background for logo -->
-                <a-plane
-                    position="0 0 -0.1"
-                    width="6"
-                    height="2"
-                    material="shader: flat; color: #000000; opacity: 0.7; transparent: true">
-                </a-plane>
-                
-                <a-text
-                    value="JOHN DOE"
-                    color="#FFE81F"
-                    align="center"
-                    anchor="center"
-                    baseline="center"
-                    scale="2 2 2"
-                    material="shader: flat; opacity: 1"
-                    animation__scale="property: scale; from: 2 2 2; to: 0.1 0.1 0.1; dur: 4000; easing: easeInCubic; delay: 1000"
-                    animation__opacity="property: opacity; from: 1; to: 0; dur: 4000; easing: linear; delay: 1000">
-                </a-text>
+            <!-- Original Star Wars Text (commented out for testing) -->
+            <!--
+            <a-entity id="text-container" position="0 1 -4" rotation="-30 0 0">
+                ... original Star Wars text content ...
             </a-entity>
+            -->
         </a-entity>
 
         <!-- Add Star Wars style CSS with important visibility settings -->
