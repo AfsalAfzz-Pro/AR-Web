@@ -422,7 +422,7 @@
                 </a-plane>
                 
                 <!-- Text content -->
-                <a-entity id="crawl-text" position="0 0 0.1">
+                <a-entity id="crawl-text" position="0 -4 0.1">
                     <a-entity
                         text-geometry="value: JOHN DOE; font: #optimerBoldFont; size: 0.4;"
                         material="color: #FFE81F; metalness: 0.8; roughness: 0.2; emissive: #FFE81F; emissiveIntensity: 0.6"
@@ -459,42 +459,6 @@
                         position="-1.5 -0.6 0">
                     </a-entity>
                 </a-entity>
-            </a-entity>
-
-            <!-- 3D Text Tests -->
-            <a-entity position="0 2 0" look-at="[camera]">
-                <a-entity 
-                    text-geometry="value: TEST 1 RED; font: #optimerBoldFont; size: 0.5;"
-                    material="color: red; metalness: 0.8; roughness: 0.2; emissive: red; emissiveIntensity: 0.6"
-                    position="-1.5 0 0"></a-entity>
-            </a-entity>
-            
-            <a-entity position="0 1 0" look-at="[camera]">
-                <a-entity 
-                    text-geometry="value: TEST 2 WHITE; font: #optimerBoldFont; size: 0.4;"
-                    material="color: white; metalness: 0.8; roughness: 0.2; emissive: white; emissiveIntensity: 0.6"
-                    position="-1.5 0 0"></a-entity>
-            </a-entity>
-            
-            <a-entity position="0 0 0" look-at="[camera]">
-                <a-entity 
-                    text-geometry="value: TEST 3 YELLOW; font: #optimerBoldFont; size: 0.4;"
-                    material="color: yellow; metalness: 0.8; roughness: 0.2; emissive: #FFFF00; emissiveIntensity: 0.6"
-                    position="-1.5 0 0"></a-entity>
-            </a-entity>
-
-            <a-entity position="0 -1 0" look-at="[camera]">
-                <a-entity 
-                    text-geometry="value: TEST 4 CYAN; font: #optimerBoldFont; size: 0.4;"
-                    material="color: cyan; metalness: 0.8; roughness: 0.2; emissive: #00FFFF; emissiveIntensity: 0.6"
-                    position="-1.5 0 0"></a-entity>
-            </a-entity>
-
-            <a-entity position="0 -2 0" look-at="[camera]">
-                <a-entity 
-                    text-geometry="value: TEST 5 GREEN; font: #optimerBoldFont; size: 0.4;"
-                    material="color: #00FF00; metalness: 0.8; roughness: 0.2; emissive: #00FF00; emissiveIntensity: 0.6"
-                    position="-1.5 0 0"></a-entity>
             </a-entity>
 
             <!-- Avatar with Ground Effects -->
@@ -666,83 +630,36 @@
             });
         });
 
-        // Enhanced text crawl controls
-        const textContainer = document.getElementById('text-container');
-        const crawlText = document.getElementById('crawl-text');
-        const logoContainer = document.getElementById('logo-container');
-
-        function resetCrawl() {
-            // Reset text position
-            crawlText.setAttribute('position', '0 -6 0');
-            crawlText.setAttribute('opacity', '1');
-            
-            // Reset animations
-            const animations = crawlText.getAttribute('animation__position');
-            crawlText.setAttribute('animation__position', animations);
-            const opacityAnim = crawlText.getAttribute('animation__opacity');
-            crawlText.setAttribute('animation__opacity', opacityAnim);
-
-            // Reset logo
-            setTimeout(() => {
-                logoContainer.object3D.visible = true;
-                logoContainer.setAttribute('scale', '1 1 1');
-                logoContainer.setAttribute('opacity', '1');
-            }, 500);
-        }
-
-        // Reset crawl when it completes
-        crawlText.addEventListener('animationcomplete', function(evt) {
-            if (evt.detail.name === 'animation__position') {
-                resetCrawl();
-            }
-        });
-
-        // Make text more visible in AR
-        function updateTextVisibility() {
-            // Adjust text container position based on screen size
-            const isMobile = window.innerWidth <= 768;
-            const distance = isMobile ? -3 : -4;
-            const height = isMobile ? 0.5 : 1;
-            
-            textContainer.setAttribute('position', `0 ${height} ${distance}`);
-            crawlText.setAttribute('width', isMobile ? 4 : 6);
-            
-            // Ensure text is visible
-            crawlText.setAttribute('material', 'shader: flat; opacity: 1');
-            crawlText.object3D.renderOrder = 999999;
-        }
-
-        // Update visibility on resize and initial load
-        window.addEventListener('resize', updateTextVisibility);
-        updateTextVisibility();
-
-        // Start crawl animation after a short delay
-        setTimeout(resetCrawl, 1000);
-
         // Initialize Star Wars text animation
         document.querySelector('a-scene').addEventListener('loaded', function () {
             const crawlText = document.querySelector('#crawl-text');
             
             // Initial animation
-            crawlText.setAttribute('animation__position', {
+            crawlText.setAttribute('animation', {
                 property: 'position',
                 from: '0 -4 0.1',
                 to: '0 4 0.1',
-                dur: 20000,
-                easing: 'linear',
-                loop: true
-            });
-            
-            // Fade animation
-            crawlText.setAttribute('animation__opacity', {
-                property: 'components.material.material.opacity',
-                from: 1,
-                to: 0,
-                dur: 20000,
+                dur: 30000,
                 easing: 'linear',
                 loop: true
             });
         });
+
+        // Remove old animation code
+        function updateTextVisibility() {
+            const isMobile = window.innerWidth <= 768;
+            const distance = isMobile ? -3 : -4;
+            const height = isMobile ? 0.5 : 1;
+            
+            const starWarsContainer = document.querySelector('#star-wars-container');
+            if (starWarsContainer) {
+                starWarsContainer.setAttribute('position', `0 ${height} ${distance}`);
+            }
+        }
+
+        // Update visibility on resize and initial load
+        window.addEventListener('resize', updateTextVisibility);
+        updateTextVisibility();
     </script>
 </body>
 </html> 
